@@ -1,0 +1,91 @@
+<!-- src/app/components/customer-list/customer-list.component.html -->
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+  <!-- Main Content -->
+  <main class="flex-1  p-6">
+    <!-- Top Header -->
+    <header class="bg-gray-800 shadow-lg z-10 mb-6" style="background-color: #1e1a1d;">
+      <div class="flex items-center justify-between px-6 py-4">
+        <div class="flex items-center space-x-4">
+          <h1 class="text-2xl font-bold text-white">Customer List</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button mat-raised-button [routerLink]="['/dashboard/customers/create']"
+            class="bg-fuchsia-600 text-white hover:bg-fuchsia-700 transition-colors duration-200"
+            style="background-color: #1e1a1d; color: #FAA8EE;">
+            Add Customer
+          </button>
+          <mat-form-field appearance="fill" class="w-64">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search by name" class="bg-gray-700 text-white">
+          </mat-form-field>
+        </div>
+      </div>
+    </header>
+    <!-- Page Content -->
+    <div class="rounded-lg shadow-xl p-6 bg-white">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color:#FAA8EE;">ID</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.id}}</td>
+        </ng-container>
+
+        <!-- Full Name Column -->
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color:#FAA8EE;">Full Name</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.fullName}}</td>
+        </ng-container>
+
+        <!-- Phone Column -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color:#FAA8EE;">Phone</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.phone}}</td>
+        </ng-container>
+
+        <!-- Registration Date Column -->
+        <ng-container matColumnDef="registrationDate">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color:#FAA8EE;">Registration Date</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.registrationDate | date}}</td>
+        </ng-container>
+
+        <!-- Subscription Count Column -->
+        <ng-container matColumnDef="subscriptionCount">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color:#FAA8EE;">Subscription Count</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.subscriptionCount}}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color:#FAA8EE;">Actions</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">
+            <button mat-icon-button [routerLink]="['/dashboard/customers/edit', element.id]"
+              class="text-fuchsia-600 hover:text-fuchsia-700 transition-colors duration-200"
+              style="background-color: #1e1a1d; color: #ffffff;">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteCustomer(element.id)"
+              class="text-red-600 hover:text-red-700 transition-colors duration-200"
+              style="background-color: #1e1a1d; color: #ffffff;">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button [routerLink]="['/dashboard/customers/details', element.id]"
+              class="text-blue-600 hover:text-blue-700 transition-colors duration-200"
+              style="background-color: #1e1a1d; color: #ffffff;">
+              <mat-icon>info</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="mt-6"></mat-paginator>
+      <div class="mat-8">
+        <span class="text-red-600">
+          {{ errorMessage }}
+        </span>
+      </div>
+    </div>
+
+  </main>
+</div>

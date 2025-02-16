@@ -1,0 +1,152 @@
+<div class="flex h-screen bg overflow-hidden ">
+  <!-- Sidebar -->
+  <aside class="fixed h-full w-72  text-gray-300 shadow-2xl z-20 border-r border-gray-700"
+    style="background-color: #1e1a1d;">
+    <!-- Logo Section -->
+    <div class="flex items-center justify-center h-20 border-b border-gray-700/50">
+      <div class="flex items-center space-x-3">
+        <div class="p-2 bg-fuchsia-800 rounded-lg" style="background-color: #a83e98;">
+          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5l6.74-6.76zM9 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
+          </svg>
+        </div>
+        <span class="text-2xl font-bold tracking-wider text-white">FitPro</span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class=" px-4 mt-6 ">
+      <div class="space-y-6">
+        <!-- Menu Section - Main -->
+        <div >
+          <h3 class="px-4 text-xs font-semibold text-fuchsia-400 uppercase tracking-wider" style="color: #FAA8EE;">
+            Main
+          </h3>
+          <div class="mt-3 space-y-1">
+            <!-- Dashboard Link -->
+            <a [routerLink]="['/dashboard/overview']"
+              routerLinkActive="bg-indigo-600/20 text-indigo-400 border-r-4 border-indigo-500"
+              class="flex items-center px-4 py-3 text-gray-400 rounded-lg hover:bg-gray-800/50 transition-all duration-200 group">
+              <mat-icon class="w-6 h-6 mr-3 group-hover:text-indigo-400 transition-colors duration-200">
+                dashboard
+              </mat-icon>
+              <span class="font-medium">Overview</span>
+            </a>
+
+            <!-- Statistics Link -->
+            <a [routerLink]="['/dashboard/statistics']" *ngIf="this.userRole == this.role"
+              routerLinkActive="bg-indigo-600/20 text-indigo-400 border-r-4 border-indigo-500"
+              class="flex items-center px-4 py-3 text-gray-400 rounded-lg hover:bg-gray-800/50 transition-all duration-200 group">
+              <mat-icon class="w-6 h-6 mr-3 group-hover:text-indigo-400 transition-colors duration-200">
+                analytics
+              </mat-icon>
+              <span class="font-medium">Statistics</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Menu Section - Management -->
+        <div>
+          <h3 class="px-4 text-xs font-semibold text-fuchsia-400 uppercase tracking-wider" style="color: #FAA8EE;">
+            Management
+          </h3>
+          <div class="mt-3 space-y-1">
+            <!-- Users Link -->
+            <a [routerLink]="['/dashboard/users']" *ngIf="this.userRole == this.role"
+              routerLinkActive="bg-indigo-600/20 text-indigo-400 border-r-4 border-indigo-500"
+              class="flex items-center px-4 py-3 text-gray-400 rounded-lg hover:bg-gray-800/50 transition-all duration-200 group">
+              <mat-icon class="w-6 h-6 mr-3 group-hover:text-indigo-400 transition-colors duration-200">
+                group
+              </mat-icon>
+              <span class="font-medium">Users</span>
+            </a>
+
+            <!-- Customers Link -->
+            <a [routerLink]="['/dashboard/customers']"
+              routerLinkActive="bg-indigo-600/20 text-indigo-400 border-r-4 border-indigo-500"
+              class="flex items-center px-4 py-3 text-gray-400 rounded-lg hover:bg-gray-800/50 transition-all duration-200 group">
+              <mat-icon class="w-6 h-6 mr-3 group-hover:text-indigo-400 transition-colors duration-200">
+                people
+              </mat-icon>
+              <span class="font-medium">Customers</span>
+            </a>
+
+            <!-- Packs Link -->
+            <a [routerLink]="['/dashboard/packs']"
+              routerLinkActive="bg-indigo-600/20 text-indigo-400 border-r-4 border-indigo-500"
+              class="flex items-center px-4 py-3 text-gray-400 rounded-lg hover:bg-gray-800/50 transition-all duration-200 group">
+              <mat-icon class="w-6 h-6 mr-3 group-hover:text-indigo-400 transition-colors duration-200">
+                card_membership
+              </mat-icon>
+              <span class="font-medium">Packs</span>
+            </a>
+
+            <!-- Subscriptions Link -->
+            <a [routerLink]="['/dashboard/subscriptions']"
+              routerLinkActive="bg-indigo-600/20 text-indigo-400 border-r-4 border-indigo-500"
+              class="flex items-center px-4 py-3 text-gray-400 rounded-lg hover:bg-gray-800/50 transition-all duration-200 group">
+              <mat-icon class="w-6 h-6 mr-3 group-hover:text-indigo-400 transition-colors duration-200">
+                assignment
+              </mat-icon>
+              <span class="font-medium">Subscriptions</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Menu Section - Account -->
+        <div>
+          <h3 class="px-4 text-xs font-semibold uppercase tracking-wider" style="color: #FAA8EE;">
+            Account
+          </h3>
+          <div class="mt-3 space-y-1">
+            <!-- Profile Link -->
+            <a [routerLink]="['/dashboard/profile/edit', userId]"
+              routerLinkActive="bg-indigo-600/20 text-indigo-400 border-r-4 border-indigo-500"
+              class="flex items-center px-4 py-3 text-gray-400 rounded-lg hover:bg-gray-800/50 transition-all duration-200 group">
+              <mat-icon class="w-6 h-6 mr-3 group-hover:text-indigo-400 transition-colors duration-200">
+                account_circle
+              </mat-icon>
+              <span class="font-medium">Profile</span>
+            </a>
+
+            <!-- Logout Button -->
+            <button (click)="logout()"
+              class="w-full flex items-center px-4 py-3 text-gray-400 rounded-lg hover:bg-red-500/10 hover:text-red-400 transition-all duration-200 group">
+              <mat-icon class="w-6 h-6 mr-3 group-hover:text-red-400 transition-colors duration-200">
+                exit_to_app
+              </mat-icon>
+              <span class="font-medium">Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 ml-72">
+    <!-- Top Header -->
+    <header class="bg-gray-800 shadow-lg z-10" style="background-color: #1e1a1d;">
+      <div class="flex items-center justify-between px-6 py-4">
+        <div class="flex items-center space-x-4">
+          <button class="p-2 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
+            <!-- <mat-icon class="text-gray-300">menu</mat-icon> -->
+          </button>
+          <div>
+            <h1 class="text-2xl font-bold text-white">Fitness Gym Management</h1>
+            <p class="text-sm text-gray-400">Welcome back, Admin</p>
+          </div>
+        </div>
+
+
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div  >
+      <div >
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+</div>

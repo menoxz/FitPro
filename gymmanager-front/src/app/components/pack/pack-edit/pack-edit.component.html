@@ -1,0 +1,61 @@
+<!-- src/app/components/edit-pack/edit-pack.component.html -->
+<form [formGroup]="packForm" (ngSubmit)="onSubmit()" class="flex h-screen bg-gray-100 overflow-hidden">
+  <!-- Main Content -->
+  <main class="flex-1  p-6">
+    <!-- Top Header -->
+    <header class="bg-gray-800 shadow-lg z-10 mb-6" style="background-color: #1e1a1d;">
+      <div class="flex items-center justify-between px-6 py-4">
+        <div class="flex items-center space-x-4">
+          <h1 class="text-2xl font-bold text-white">Edit Pack</h1>
+        </div>
+      </div>
+    </header>
+    <!-- Page Content -->
+    <div class="rounded-lg shadow-xl p-6 bg-white">
+      <div class="space-y-6">
+        <!-- Name Field -->
+        <div class="relative">
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="name" formControlName="name" required
+            class="mt-1 block w-full h-12 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500 sm:text-sm"
+            placeholder="Enter pack name">
+          <div *ngIf="packForm.get('name')?.invalid && packForm.get('name')?.touched"
+            class="mt-1 text-sm text-red-600">
+            Name is required
+          </div>
+        </div>
+        <!-- Duration in Months Field -->
+        <div class="relative">
+          <label for="durationInMonths" class="block text-sm font-medium text-gray-700">Duration (months)</label>
+          <input type="number" id="durationInMonths" formControlName="durationInMonths" required
+            class="mt-1 block w-full h-12 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500 sm:text-sm"
+            placeholder="Enter duration in months">
+          <div *ngIf="packForm.get('durationInMonths')?.invalid && packForm.get('durationInMonths')?.touched"
+            class="mt-1 text-sm text-red-600">
+            Duration is required and must be at least 1 month
+          </div>
+        </div>
+        <!-- Monthly Price Field -->
+        <div class="relative">
+          <label for="monthlyPrice" class="block text-sm font-medium text-gray-700">Monthly Price</label>
+          <input type="number" id="monthlyPrice" formControlName="monthlyPrice" step="0.01" required
+            class="mt-1 block w-full h-12 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500 sm:text-sm"
+            placeholder="Enter monthly price">
+          <div *ngIf="packForm.get('monthlyPrice')?.invalid && packForm.get('monthlyPrice')?.touched"
+            class="mt-1 text-sm text-red-600">
+            Monthly price is required and must be at least $0.01
+          </div>
+        </div>
+      </div>
+      <!-- Submit Button -->
+      <div class="mt-8 ">
+        <button type="submit"
+          class=" flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white"
+          style="background-color: #1e1a1d; color: #FAA8EE;"
+          [disabled]="packForm.invalid">
+          Update Pack
+        </button>
+      </div>
+    </div>
+  </main>
+</form>

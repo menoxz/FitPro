@@ -1,0 +1,60 @@
+<!-- src/app/components/edit-profile/edit-profile.component.html -->
+<form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()" class="flex h-screen bg-gray-100 overflow-hidden">
+  <!-- Main Content -->
+  <main class="flex-1  p-6">
+    <!-- Top Header -->
+    <header class="bg-gray-800 shadow-lg z-10 mb-6" style="background-color: #1e1a1d;">
+      <div class="flex items-center justify-between px-6 py-4">
+        <div class="flex items-center space-x-4">
+          <h1 class="text-2xl font-bold text-white">Edit Profile</h1>
+        </div>
+      </div>
+    </header>
+    <!-- Page Content -->
+    <div class="rounded-lg shadow-xl p-6 bg-white">
+      <div class="space-y-4">
+        <!-- Email Field -->
+        <div class="relative">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" formControlName="email" autocomplete="off"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500 sm:text-sm"
+            placeholder="Enter your email" style="height: 50px;">
+          <div *ngIf="editProfileForm.get('email')?.invalid && editProfileForm.get('email')?.touched"
+            class="mt-1 text-sm text-red-600">
+            Email is required and must be valid
+          </div>
+        </div>
+        <!-- Password Field -->
+        <div class="relative">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" formControlName="password" style="height: 50px;"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500 sm:text-sm"
+            placeholder="Enter your password">
+          <div *ngIf="editProfileForm.get('password')?.invalid && editProfileForm.get('password')?.touched"
+            class="mt-1 text-sm text-red-600">
+            Password is required and must be between 6 and 40 characters long
+          </div>
+        </div>
+        <!-- Phone Number Field -->
+        <div class="relative">
+          <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+          <input type="tel" id="phoneNumber" formControlName="phoneNumber" style="height: 50px;"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500 sm:text-sm"
+            placeholder="Enter your phone number">
+        </div>
+      </div>
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button type="submit"
+          class=" flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-fuchsia-600 hover:bg-fuchsia-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-fuchsia-500"
+          [disabled]="editProfileForm.invalid" style="background-color: #1e1a1d; color:#FAA8EE;">
+          Update Profile
+        </button>
+      </div>
+    </div>
+    <!-- Success Message -->
+    <div *ngIf="succesMessage" class="mt-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700">
+      {{ succesMessage }}
+    </div>
+  </main>
+</form>

@@ -1,0 +1,88 @@
+<!-- src/app/components/subscription-list/subscription-list.component.html -->
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+  <!-- Main Content -->
+  <main class="flex-1  p-6">
+    <!-- Top Header -->
+    <header class="bg-gray-800 shadow-lg z-10 mb-6" style="background-color: #1e1a1d;">
+      <div class="flex items-center justify-between px-6 py-4">
+        <div class="flex items-center space-x-4">
+          <h1 class="text-2xl font-bold text-white">Subscription List</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button mat-raised-button [routerLink]="['/dashboard/subscriptions/create']"
+            class="bg-fuchsia-600 text-white hover:bg-fuchsia-700 transition-colors duration-200"
+            style="background-color: #1e1a1d; color: #FAA8EE;">
+            Subscribe
+          </button>
+          <!-- Search Field -->
+          <div class="mb-4">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Search</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Search by name"
+                class="bg-gray-700 text-white">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Table Content -->
+    <div class="rounded-lg shadow-xl p-6 bg-white">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color: #FAA8EE;">ID</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.id}}</td>
+        </ng-container>
+
+        <!-- Customer ID Column -->
+        <ng-container matColumnDef="customerId">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color: #FAA8EE;">Customer</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.customer.fullName}}</td>
+        </ng-container>
+
+        <!-- Pack ID Column -->
+        <ng-container matColumnDef="packId">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color: #FAA8EE;">Pack</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.pack.name}}</td>
+        </ng-container>
+
+        <!-- Start Date Column -->
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color: #FAA8EE;">Start Date</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.startDate | date}}</td>
+        </ng-container>
+
+        <!-- End Date Column -->
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color: #FAA8EE;">End Date</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{getEndDate(element.startDate, element.pack.durationInMonths * 30) | date}}</td>
+        </ng-container>
+
+        <!-- Active Column -->
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color: #FAA8EE;">Active</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">{{element.active ? 'Yes' : 'No'}}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="px-4 py-2 bg-gray-100 text-left text-gray-600 font-semibold" style="color: #FAA8EE;">Actions</th>
+          <td mat-cell *matCellDef="let element" class="px-4 py-2 text-white">
+            <button mat-icon-button (click)="cancelSubscription(element.id)"
+              class="text-red-600 hover:text-red-700 transition-colors duration-200"
+              style="background-color: #1e1a1d; color: #ffffff;">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <!-- Pagination -->
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="mt-6"></mat-paginator>
+    </div>
+  </main>
+</div>

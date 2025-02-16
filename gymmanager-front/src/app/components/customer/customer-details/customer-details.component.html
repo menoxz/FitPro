@@ -1,0 +1,89 @@
+<!-- src/app/components/customer-details/customer-details.component.html -->
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+  <!-- Main Content -->
+  <main class="flex-1  p-6">
+    <!-- Top Header -->
+    <header class="bg-gray-800 shadow-lg z-10 mb-6" style="background-color: #1e1a1d;">
+      <div class="flex items-center justify-between px-6 py-4">
+        <div class="flex items-center space-x-4">
+          <h1 class="text-2xl font-bold text-white">Customer Details</h1>
+        </div>
+      </div>
+    </header>
+    <!-- Page Content -->
+    <div class="rounded-lg shadow-xl p-6 bg-white">
+      <div class="space-y-6">
+        <!-- Customer Information -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+          <h2 class="text-2xl font-bold text-gray-800">{{ customer.fullName }}</h2>
+          <div class="mt-4 space-y-2">
+            <div class="flex items-center">
+              <strong class="text-gray-600">ID:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.id }}</span>
+            </div>
+            <div class="flex items-center">
+              <strong class="text-gray-600">Phone:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.phone }}</span>
+            </div>
+            <div class="flex items-center">
+              <strong class="text-gray-600">Registration Date:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.registrationDate | date }}</span>
+            </div>
+            <div class="flex items-center">
+              <strong class="text-gray-600">Subscription Count:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.subscriptionCount }}</span>
+            </div>
+          </div>
+        </div>
+        <!-- Active Subscription Information -->
+        <div *ngIf="customer?.activeSubscription" class="bg-gray-50 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold text-gray-800">Active Subscription</h3>
+          <div class="mt-4 space-y-2">
+            <div class="flex items-center">
+              <strong class="text-gray-600">ID:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.activeSubscription!.id }}</span>
+            </div>
+            <div class="flex items-center">
+              <strong class="text-gray-600">Start Date:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.activeSubscription!.startDate | date }}</span>
+            </div>
+            <div class="flex items-center">
+              <strong class="text-gray-600">Active:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.activeSubscription!.active ? 'Yes' : 'No' }}</span>
+            </div>
+            <div class="flex items-center">
+              <strong class="text-gray-600">Pack:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.activeSubscription!.pack.name }}</span>
+            </div>
+            <div class="flex items-center">
+              <strong class="text-gray-600">Duration (months):</strong>
+              <span class="ml-2 text-gray-800">{{ customer.activeSubscription!.pack.durationInMonths }}</span>
+            </div>
+            <div class="flex items-center">
+              <strong class="text-gray-600">Monthly Price:</strong>
+              <span class="ml-2 text-gray-800">{{ customer.activeSubscription!.pack.monthlyPrice}} Fcfa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="mt-8 flex space-x-4">
+        <button mat-raised-button [routerLink]="['/dashboard/customers/edit', customer.id]"
+          class=" flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white"
+          style="background-color: #1e1a1d; color: #FAA8EE;">
+          Edit
+        </button>
+        <button mat-raised-button (click)="deleteCustomer(customer.id)"
+          class=" flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white"
+          style="background-color: #ef4444; color: white;">
+          Delete
+        </button>
+        <button mat-raised-button [routerLink]="['/dashboard/customers']"
+          class=" flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white"
+          style="background-color: #1e1a1d; color: #FAA8EE;">
+          Back
+        </button>
+      </div>
+    </div>
+  </main>
+</div>

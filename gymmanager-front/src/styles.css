@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@tailwind utilities;
+html, body { height: 100%;  }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+@layer components {
+  .dashboard-card {
+    @apply bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow;
+  }
+
+  .dashboard-stat {
+    @apply text-2xl font-bold text-gray-900;
+  }
+
+  .dashboard-label {
+    @apply text-sm font-medium text-gray-600;
+  }
+
+  .dashboard-icon-container {
+    @apply p-3 rounded-full;
+  }
+}
+/* src/styles.css ou src/styles.scss *//* src/styles.css ou src/styles.scss */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  margin-top: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-left-width: 0.25rem;
+  border-left-color: #ef4444;
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+.mat-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mat-header-cell,
+.mat-cell {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mat-paginator {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+}
